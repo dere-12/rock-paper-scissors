@@ -10,15 +10,9 @@ function getComputerChoice() {
   }
 }
 
-// console.log(getComputerChoice());
-
 function getHumanChoice() {
-  // let humanChoice = prompt("Choose from rock, paper, or scissors");
-
-  return prompt("Choose from rock, paper, or scissors");
+  return prompt("Choose from rock, paper, scissors");
 }
-
-// console.log(getHumanChoice());
 
 function playGame() {
   let humanScore = 0;
