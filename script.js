@@ -10,36 +10,29 @@ function getComputerChoice() {
   }
 }
 
-// function getHumanChoice() {
-//   return prompt(
-//     "Please enter your choice: rock, paper, or scissors"
-//   ).toLowerCase();
-// }
-
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
 
-  const rockBtn = document.querySelector(".rock");
-  const paperBtn = document.querySelector(".paper");
-  const scissorsBtn = document.querySelector(".scissors");
-
-  rockBtn.addEventListener("click", () => {
-    const humanChoice = "rock";
+  const btns = document.querySelector(".buttons-container");
+  btns.addEventListener("click", (event) => {
     const computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-  });
+    let humanChoice;
 
-  paperBtn.addEventListener("click", () => {
-    const humanChoice = "paper";
-    const computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
-  });
-
-  scissorsBtn.addEventListener("click", () => {
-    const humanChoice = "scissors";
-    const computerChoice = getComputerChoice();
-    playRound(humanChoice, computerChoice);
+    switch (event.target.id) {
+      case "rock":
+        humanChoice = "rock";
+        playRound(humanChoice, computerChoice);
+        break;
+      case "paper":
+        humanChoice = "paper";
+        playRound(humanChoice, computerChoice);
+        break;
+      case "scissors":
+        humanChoice = "scissors";
+        playRound(humanChoice, computerChoice);
+        break;
+    }
   });
 
   function playRound(humanChoice, computerChoice) {
@@ -74,13 +67,6 @@ function playGame() {
       );
     }
   }
-
-  // for (i = 1; i <= 5; i++) {
-  //   const humanChoice = getHumanChoice();
-  //   const computerChoice = getComputerChoice();
-
-  //   playRound(humanChoice, computerChoice, i);
-  // }
 
   if (humanScore > computerScore) {
     console.log(`
