@@ -13,6 +13,7 @@ function getComputerChoice() {
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
+  const resultDiv = document.querySelector(".result");
 
   const btns = document.querySelector(".buttons-container");
   btns.addEventListener("click", (event) => {
@@ -41,30 +42,32 @@ function playGame() {
         computer choice: ${computerChoice}
       `);
 
+    const para = document.createElement("p");
+    const roundResult = document.createElement("span");
+    const spn = document.createElement("span");
+    spn.textContent = ` You chose: ${humanChoice} and Computer chose: ${computerChoice}`;
+    para.appendChild(spn);
+    resultDiv.appendChild(para);
+
     if (humanChoice === "rock" && computerChoice === "scissors") {
       humanScore++;
-      console.log(
-        `Round ? result: You Won! Rock beats Scissors. Your Score = ${humanScore} and Computer Score = ${computerScore}.`
-      );
+      roundResult.textContent = `You Won!  Rock beats Scissors. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
+      para.appendChild(roundResult);
     } else if (humanChoice === "paper" && computerChoice === "rock") {
       humanScore++;
-      console.log(
-        `Round ? result: You Won! Paper beats Rock. Your Score = ${humanScore} and Computer Score = ${computerScore}.`
-      );
+      roundResult.textContent = `You Won! Paper beats Rock. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
+      para.appendChild(roundResult);
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
       humanScore++;
-      console.log(
-        `Round ? result: You Won! Scissors beats Paper. Your Score = ${humanScore} and Computer Score = ${computerScore}.`
-      );
+      roundResult.textContent = `You Won! Scissors beats Paper. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
+      para.appendChild(roundResult);
     } else if (humanChoice === computerChoice) {
-      console.log(
-        `Round ? result: Tie!  Your Score = ${humanScore} and Computer Score = ${computerScore}.`
-      );
+      roundResult.textContent = `Tie!  Your Score = ${humanScore} and Computer Score = ${computerScore}`;
+      para.appendChild(roundResult);
     } else {
       computerScore++;
-      console.log(
-        `Round ? result: Computer Won! ${computerChoice} beats ${humanChoice}. Computer's Score = ${computerScore} and Your Score = ${humanScore}.`
-      );
+      roundResult.textContent = `Computer Won! ${computerChoice} beats ${humanChoice}. Computer's Score = ${computerScore} and Your Score = ${humanScore}`;
+      para.appendChild(roundResult);
     }
   }
 

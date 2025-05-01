@@ -1,0 +1,10 @@
+body {
+  text-align: center;
+  background-color: black;
+  color: white;
+}
+
+span {
+  font-style: italic;
+  display: block;
+}
