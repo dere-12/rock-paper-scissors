@@ -13,7 +13,9 @@ function getComputerChoice() {
 function playGame() {
   let humanScore = 0;
   let computerScore = 0;
+  let round = 0;
   const resultDiv = document.querySelector(".result");
+  const finalResult = document.querySelector(".finalResult");
 
   const btns = document.querySelector(".buttons-container");
   btns.addEventListener("click", (event) => {
@@ -37,61 +39,63 @@ function playGame() {
   });
 
   function playRound(humanChoice, computerChoice) {
-    console.log(`
-        human choice: ${humanChoice},
-        computer choice: ${computerChoice}
-      `);
-
     const para = document.createElement("p");
     const roundResult = document.createElement("span");
     const spn = document.createElement("span");
-    spn.textContent = ` You chose: ${humanChoice} and Computer chose: ${computerChoice}`;
+    const img = document.createElement("img");
+    const img2 = document.createElement("img");
+
+    img2.src = `images/${humanChoice}.png`; // an emoji for humanChoice
+    img.src = `images/${computerChoice}.png`; // an emoji for computerChoice
+    spn.appendChild(img2);
+    spn.appendChild(img);
     para.appendChild(spn);
     resultDiv.appendChild(para);
 
     if (humanChoice === "rock" && computerChoice === "scissors") {
       humanScore++;
-      roundResult.textContent = `You Won!  Rock beats Scissors. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
+      roundResult.textContent = `Rock beats Scissors - You won this round. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
       para.appendChild(roundResult);
     } else if (humanChoice === "paper" && computerChoice === "rock") {
       humanScore++;
-      roundResult.textContent = `You Won! Paper beats Rock. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
+      roundResult.textContent = `Paper beats Rock - You won this round. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
       para.appendChild(roundResult);
     } else if (humanChoice === "scissors" && computerChoice === "paper") {
       humanScore++;
-      roundResult.textContent = `You Won! Scissors beats Paper. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
+      roundResult.textContent = `Scissors beats Paper - You won this round. Your Score = ${humanScore} and Computer Score = ${computerScore}`;
       para.appendChild(roundResult);
     } else if (humanChoice === computerChoice) {
       roundResult.textContent = `Tie!  Your Score = ${humanScore} and Computer Score = ${computerScore}`;
       para.appendChild(roundResult);
     } else {
       computerScore++;
-      roundResult.textContent = `Computer Won! ${computerChoice} beats ${humanChoice}. Computer's Score = ${computerScore} and Your Score = ${humanScore}`;
+      roundResult.textContent = `${
+        computerChoice.charAt(0).toUpperCase() + computerChoice.slice(1)
+      } beats ${humanChoice} - Computer won this round. Computer Score = ${computerScore} and Your Score = ${humanScore}`;
       para.appendChild(roundResult);
     }
-  }
 
-  if (humanScore > computerScore) {
-    console.log(`
+    round++;
 
-        *******  Total Result            Score  *******
+    if (round === 5) {
+      let message = document.createElement("p");
+      let resetBtn = document.createElement("button");
+      finalResult.appendChild(message);
+      finalResult.appendChild(resetBtn);
 
-                  YOU Won!!!             ${humanScore}
-      `);
-  } else if (computerScore > humanScore) {
-    console.log(`
+      if (humanScore > computerScore) {
+        message.innerText = `YOU WON!`;
+      } else if (computerScore > humanScore) {
+        message.innerText = `COMPUTER WON!`;
+      } else {
+        message.innerText = `TIE!`;
+      }
 
-      *******  Total Result              Score  *******
-
-                COMPUTER Won!!!          ${computerScore}
-    `);
-  } else {
-    console.log(`
-
-      *******  Total Result              Score *******
-
-                TIE!                     ${humanScore} = ${computerScore}
-    `);
+      resetBtn.innerHTML = "Restart";
+      resetBtn.addEventListener("click", () => {
+        location.reload();
+      });
+    }
   }
 }
 
